@@ -59,7 +59,7 @@ int get_final_class(vector<Prediction> label_predictions, int instance_index,
 	int number_of_classes, int number_of_classifier);
 Prediction voter(Dataset dataset, vector<Prediction> label_predictions, 
 	int number_of_classes, int number_of_classifier);
-void print_scores(vector<Prediction> label_predictions, 
+void print_scores(vector<Prediction>& label_predictions, 
 	vector<Dataset> weight_vectors, Dataset dataset, Labels labels, 
 	int number_of_classes, vector<string> files);
 void print_accuracy(vector<Prediction> label_predictions, Dataset dataset, 
@@ -244,7 +244,7 @@ Prediction voter(Dataset dataset, vector<Prediction> label_predictions,
 	return final_pred;
 }
 
-void print_scores(vector<Prediction> label_predictions, 
+void print_scores(vector<Prediction>& label_predictions, 
 	vector<Dataset> weight_vectors, Dataset dataset, Labels labels, 
 	int number_of_classes, vector<string> files) {
 
@@ -254,7 +254,6 @@ void print_scores(vector<Prediction> label_predictions,
   			number_of_classes);
   		float score = get_score(dataset, labels, label_prediction);
   		label_predictions.push_back(label_prediction);
-  		cout << files[i] << COLON << SPACE  << score << endl;
   	}
 }
 
@@ -264,7 +263,7 @@ void print_accuracy(vector<Prediction> label_predictions, Dataset dataset,
 	Prediction final_prediction = voter(dataset, label_predictions, 
 		number_of_classes, number_of_classifier);
 	float score = get_score(dataset, labels, final_prediction);
-	cout << ACCURACY << COLON << setprecision(PRECISION) << 
+	cout << ACCURACY << COLON << SPACE << setprecision(PRECISION) << 
 	fixed << (score * 100) << PERCENT << endl; 
 }
 
